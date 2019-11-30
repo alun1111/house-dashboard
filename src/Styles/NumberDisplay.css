@@ -1,0 +1,12 @@
+.number-display-box {
+    box-sizing: border-box;
+    width: 200px;
+}
+
+.number-display-title-large {
+    font-size: 80px;
+}
+
+.number-display-title-small {
+    font-size: 20px;
+}
