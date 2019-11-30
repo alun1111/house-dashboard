@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import measurementData from './data/measurements'
+import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 const Display = ( { title, origin } ) => {
 
@@ -8,6 +9,9 @@ const Display = ( { title, origin } ) => {
         <div>
             <h2>{ title }</h2>
             <h2>{ measurement }</h2>
+            <Sparklines data={measurementData[origin].recent}>
+                <SparklinesLine />
+            </Sparklines>
         </div>
     );
 };
