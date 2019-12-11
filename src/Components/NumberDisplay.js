@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import measurementData from '../data/measurements'
+import React from 'react';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import '../Styles/NumberDisplay.css'
 
-const NumberDisplay = ( { title, origin } ) => {
+const NumberDisplay = ( { measurements } ) => {
 
-    const measurement = useState(measurementData[origin].current);
     return ( 
-        <div className="number-display-box">
-            <div className="number-display-title-small">{ title }</div>
-            <div className="number-display-title-large">{ measurement }</div>
-            <Sparklines data={measurementData[origin].recent}>
-                <SparklinesLine />
-            </Sparklines>
+        <div>
+        { 
+            measurements.map((m) => (
+                <div className="number-display-box">
+                    <div className="number-display-title-small">{ m.name }</div>
+                    <div className="number-display-title-large">{ m.current.value }</div>
+
+                    <Sparklines data={m.recent}>
+                        <SparklinesLine />
+                    </Sparklines>
+                </div>
+
+            ))
+        }
         </div>
     );
 };

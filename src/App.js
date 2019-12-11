@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import NumberDisplay from './Components/NumberDisplay.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <NumberDisplay title="River Level" origin="riverLevel"/>
-        <NumberDisplay title="Outside Temperature" origin="temperature"/>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    componentDidUpdate(){
+      fetch('http://192.168.1.100:5000/measurementpoint')
+      .then(res => res.json())
+      .then((data) => { 
+        this.setState( { m: data.measurements });
+        console.log(this.state.m);
+        })
+    };
+
+    render(){
+      return (
+        <div className="App">
+          <header className="App-header">
+              <NumberDisplay measurements={ this.state.m } />
+          </header>
+        </div>
+      );
+    }
 }
 
 export default App;
