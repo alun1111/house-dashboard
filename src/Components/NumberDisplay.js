@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import '../Styles/NumberDisplay.css'
 
-const NumberDisplay = ( { measurements } ) => {
+class NumberDisplay extends Component {
 
-    return ( 
-        <div>
-        { 
-            measurements.map((m) => (
-                <div className="number-display-box">
-                    <div className="number-display-title-small">{ m.name }</div>
-                    <div className="number-display-title-large">{ m.current.value }</div>
+    constructor(props) {
+      super(props);
 
-                    <Sparklines data={m.recent}>
-                        <SparklinesLine />
-                    </Sparklines>
-                </div>
+      this.state = { measurementData: props.measurementData };
+    }
 
-            ))
+    componentDidUpdate(nextProps) {
+        if(this.props.measurementData !== nextProps.measurementData){
+            this.setState({ measurementData: nextProps.measurementData });  
         }
-        </div>
-    );
+    };
+
+    render() { 
+        return ( 
+            <div>
+            { 
+                this.state.measurementData.map((m, i) => (
+                    <div className="number-display-box" key={i}>
+                        <div className="number-display-title-small">{ m.name }</div>
+                        <div className="number-display-title-large">{ m.current.value }</div>
+
+                        <Sparklines data={m.recent}>
+                            <SparklinesLine />
+                        </Sparklines>
+                    </div>
+
+                ))
+            }
+            </div>
+        )
+    };
 };
 
 export default NumberDisplay
