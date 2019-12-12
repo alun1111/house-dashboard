@@ -10,7 +10,8 @@ class App extends Component {
       this.state = { measurementData:
         [{ 
           name: "No data", 
-          current : { value: 0 }
+          current : { value: 0 },
+          recent : [0,0,0]
         }] };
     }
 

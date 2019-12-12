@@ -10,9 +10,9 @@ class NumberDisplay extends Component {
       this.state = { measurementData: props.measurementData };
     }
 
-    componentDidUpdate(nextProps) {
-        if(this.props.measurementData !== nextProps.measurementData){
-            this.setState({ measurementData: nextProps.measurementData });  
+    componentDidUpdate(prevProps) {
+        if(this.props.measurementData !== prevProps.measurementData){
+            this.setState({ measurementData: this.props.measurementData });  
         }
     };
 
@@ -25,7 +25,7 @@ class NumberDisplay extends Component {
                         <div className="number-display-title-small">{ m.name }</div>
                         <div className="number-display-title-large">{ m.current.value }</div>
 
-                        <Sparklines data={m.recent}>
+                        <Sparklines data={ m.recent.map((m) => (m.value)) }>
                             <SparklinesLine />
                         </Sparklines>
                     </div>
