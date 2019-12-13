@@ -16,7 +16,7 @@ class App extends Component {
     }
 
     componentDidMount(){
-      fetch('http://localhost:5000/measurementpoint')
+      fetch('http://192.168.1.100:5000/measurementpoint')
       .then(res => res.json())
       .then((data) => { 
         this.setState( { measurementData: data.measurements });
