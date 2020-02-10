@@ -7,7 +7,7 @@ class App extends Component {
     constructor(props) {
       super(props);
 
-      this.state = { measurementData:
+      this.state = { riverLevels:
         [{ 
           name: "No data", 
           current : { value: 0 },
@@ -16,10 +16,10 @@ class App extends Component {
     }
 
     componentDidMount(){
-      fetch('http://192.168.1.100:5000/measurementpoint')
+      fetch('http://192.168.1.100:5000/riverlevelreadings')
       .then(res => res.json())
       .then((data) => { 
-        this.setState( { measurementData: data.measurements });
+        this.setState( { riverLevels: data.readings });
         })
     };
 
@@ -27,7 +27,7 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header">
-              <NumberDisplay measurementData={ this.state.measurementData } />
+              <NumberDisplay measurementData={ this.state.riverLevels } />
           </header>
         </div>
       );
