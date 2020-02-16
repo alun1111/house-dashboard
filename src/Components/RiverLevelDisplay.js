@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import '../Styles/NumberDisplay.css'
 
-class NumberDisplay extends Component {
+class RiverLevelDisplay extends Component {
 
     constructor(props) {
       super(props);
 
-      this.state = { measurementData: props.measurementData };
+      this.state = { measurementData: props.measurementData, stationName: props.stationName };
     }
 
     componentDidUpdate(prevProps) {
@@ -22,7 +22,7 @@ class NumberDisplay extends Component {
             { 
                 this.state.measurementData.map((m, i) => (
                     <div className="number-display-box" key={i}>
-                        <div className="number-display-title-small">{ m.name }</div>
+                        <div className="number-display-title-small">{ this.state.stationName }</div>
                         <div className="number-display-title-small">{ new Date(m.current.measurementTime).toLocaleString("en-GB") }</div>
                         <div className="number-display-title-large">{ Number(m.current.value).toFixed(2) }</div>
 
@@ -38,4 +38,4 @@ class NumberDisplay extends Component {
     };
 };
 
-export default NumberDisplay
+export default RiverLevelDisplay

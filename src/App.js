@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import NumberDisplay from './Components/NumberDisplay.js'
+import RiverLevelDisplay from './Components/RiverLevelDisplay.js'
 
 class App extends Component {
 
@@ -8,19 +9,19 @@ class App extends Component {
       super(props);
 
       this.state = { 
-        riverLevels1:
+        almondell_level:
           [{ 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
           }],
-        riverLevels2:
+        whitburn_level:
           [{ 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
           }],
-        riverLevels3:
+        cragiehall_level:
           [{ 
             name: "No data", 
             current : { value: 0 },
@@ -47,9 +48,9 @@ class App extends Component {
          return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]) 
       })
       .then(([data1, data2, data3, data4]) => {
-        this.setState({riverLevels1: data1.readings})
-        this.setState({riverLevels2: data2.readings})
-        this.setState({riverLevels3: data3.readings})
+        this.setState({almondell_level: data1.readings})
+        this.setState({whitburn_level: data2.readings})
+        this.setState({cragiehall_level: data3.readings})
         this.setState({weatherStation: data4.readings})
       })
     };
@@ -58,9 +59,9 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header">
-              <NumberDisplay measurementData={ this.state.riverLevels1 } />
-              <NumberDisplay measurementData={ this.state.riverLevels2 } />
-              <NumberDisplay measurementData={ this.state.riverLevels3 } />
+              <RiverLevelDisplay measurementData={ this.state.almondell_level } stationName="Almondell" />
+              <RiverLevelDisplay measurementData={ this.state.whitburn_level } stationName="Whitburn" />
+              <RiverLevelDisplay measurementData={ this.state.cragiehall_level } stationName="Cragiehall"/>
               <NumberDisplay measurementData={ this.state.weatherStation } />
           </header>
         </div>
