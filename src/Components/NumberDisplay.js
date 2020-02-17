@@ -23,11 +23,11 @@ class NumberDisplay extends Component {
                 this.state.measurementData.map((m, i) => (
                     <div className="number-display-box" key={i}>
                         <div className="number-display-title-small">{ m.name }</div>
-                        <div className="number-display-title-small">{ new Date(m.current.measurementTime).toLocaleString("en-GB") }</div>
+                        <div className="number-display-title-very-small">{ new Date(m.current.measurementTime).toLocaleString("en-GB") }</div>
                         <div className="number-display-title-large">{ Number(m.current.value).toFixed(2) }</div>
 
-                        <Sparklines data={ m.recent.map((m) => (m.value)) }>
-                            <SparklinesLine />
+                        <Sparklines data={ m.recent.map((m) => (m.value)) } min={-5} max={25}>
+                            <SparklinesLine/>
                         </Sparklines>
                     </div>
 
