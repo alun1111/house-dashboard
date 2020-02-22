@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Sparklines, SparklinesLine } from 'react-sparklines';
 import '../Styles/NumberDisplay.css'
+import MetricsGraphics from 'react-metrics-graphics';
+import 'metrics-graphics/dist/metricsgraphics.css';
+
 
 class RiverLevelDisplay extends Component {
 
@@ -26,12 +28,17 @@ class RiverLevelDisplay extends Component {
                         <div className="number-display-title-very-small">{ new Date(m.current.measurementTime).toLocaleString("en-GB") }</div>
                         <div className="number-display-title-large">{ Number(m.current.value).toFixed(2) }</div>
 
-                        <Sparklines data={ m.recent.map((m) => (m.value)) } min={0} max={2}>
-                            <SparklinesLine />
-                        </Sparklines>
+                        <MetricsGraphics
+                            data={ 
+                                [m.recent.map((m) => ({'date':new Date(m.measurementTime).toLocaleString("en-GB"),'value':m.value}))]
+                            }
+                        />
                     </div>
 
                 ))
+            }
+            {
+
             }
             </div>
         )

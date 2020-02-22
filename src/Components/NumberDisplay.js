@@ -26,7 +26,7 @@ class NumberDisplay extends Component {
                         <div className="number-display-title-very-small">{ new Date(m.current.measurementTime).toLocaleString("en-GB") }</div>
                         <div className="number-display-title-large">{ Number(m.current.value).toFixed(2) }</div>
 
-                        <Sparklines data={ m.recent.map((m) => (m.value)) } min={-5} max={25}>
+                        <Sparklines data={ m.recent.map((m) => (m.value)) } >
                             <SparklinesLine/>
                         </Sparklines>
                     </div>
