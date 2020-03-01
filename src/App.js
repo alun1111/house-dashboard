@@ -48,9 +48,9 @@ class App extends Component {
          return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]) 
       })
       .then(([data1, data2, data3, data4]) => {
-        this.setState({almondell_level: data1.readings})
-        this.setState({whitburn_level: data2.readings})
-        this.setState({cragiehall_level: data3.readings})
+        this.setState({almondell_level: data1})
+        this.setState({whitburn_level: data2})
+        this.setState({cragiehall_level: data3})
         this.setState({weatherStation: data4.readings})
       })
     };
@@ -62,7 +62,7 @@ class App extends Component {
               <RiverLevelDisplay measurementData={ this.state.almondell_level } stationName="Almondell" />
               <RiverLevelDisplay measurementData={ this.state.whitburn_level } stationName="Whitburn" />
               <RiverLevelDisplay measurementData={ this.state.cragiehall_level } stationName="Cragiehall"/>
-              <NumberDisplay measurementData={ this.state.weatherStation } />
+              {/* <NumberDisplay measurementData={ this.state.weatherStation } /> */}
           </header>
         </div>
       );

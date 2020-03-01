@@ -18,16 +18,8 @@ class RiverLevelDisplay extends Component {
     };
 
     render() {
-        const current = this.state.measurementData 
-            ? this.state.measurementData.current 
-            : {measurementTime : 0, value: 0}; 
-
-        const recent = this.state.measurementData 
-            ? this.state.measurementData.recent
-            : [{measurementTime : 0, value: 0}]; 
-            
-        console.log(current);
-        console.log(recent);
+        var current = this.state.measurementData.current;
+        var recent = this.state.measurementData.recent; 
 
         return ( 
             <div>
@@ -36,9 +28,15 @@ class RiverLevelDisplay extends Component {
                         <div className="number-display-title-small">{ this.state.stationName }</div>
                         <div className="number-display-title-very-small">{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
                         <div className="number-display-title-large">{ Number(current.value).toFixed(2) }</div>
-                        <LineChart width={600} height={400} data={recent}>
-                            <Line dataKey="measurementTime" />
-                        </LineChart>
+                            <LineChart
+                            width={200}
+                            height={200}
+                            data={recent}
+                            >
+                            <YAxis dataKey="value" />
+                            <XAxis dataKey="measurementTime"  />
+                            <Line type="monotone" dataKey="value" stroke="#f5f5f5" yAxisId={0} />
+                            </LineChart>
                     </div>
             }
             </div>
