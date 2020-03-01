@@ -10,23 +10,23 @@ class App extends Component {
 
       this.state = { 
         almondell_level:
-          [{ 
+          { 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
-          }],
+          },
         whitburn_level:
-          [{ 
+          { 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
-          }],
+          },
         cragiehall_level:
-          [{ 
+          { 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
-          }],
+          },
         weatherStation:
           [{ 
             name: "No data", 
