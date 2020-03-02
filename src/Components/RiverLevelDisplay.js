@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Sparklines, SparklinesLine } from 'react-sparklines';
 import '../Styles/NumberDisplay.css'
+import { XAxis, YAxis, AreaChart, Area } from 'recharts';
 
 class RiverLevelDisplay extends Component {
-
     constructor(props) {
       super(props);
 
@@ -16,22 +15,27 @@ class RiverLevelDisplay extends Component {
         }
     };
 
-    render() { 
+    render() {
+        var current = this.state.measurementData.current;
+        var recent = this.state.measurementData.recent; 
+
         return ( 
             <div>
-            { 
-                this.state.measurementData.map((m, i) => (
-                    <div className="number-display-box" key={i}>
-                        <div className="number-display-title-small">{ this.state.stationName }</div>
-                        <div className="number-display-title-very-small">{ new Date(m.current.measurementTime).toLocaleString("en-GB") }</div>
-                        <div className="number-display-title-large">{ Number(m.current.value).toFixed(2) }</div>
-
-                        <Sparklines data={ m.recent.map((m) => (m.value)) } min={0} max={2}>
-                            <SparklinesLine />
-                        </Sparklines>
+            {
+                    <div className="container">
+                        <div className="left-half">
+                            <div className="number-display-title-small">{ this.state.stationName }</div>
+                            <div className="number-display-title-very-small">{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
+                            <div className="number-display-title-large">{ Number(current.value).toFixed(2) }</div>
+                        </div>
+                        <div className="right-half">
+                            <AreaChart width={400} height={200} data={recent} >
+                                <YAxis dataKey="value" />
+                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" />
+                                <Area type="monotone" dataKey="value" stroke="#f5f5f5" yAxisId={0} dot={false} />
+                            </AreaChart>
+                        </div>
                     </div>
-
-                ))
             }
             </div>
         )

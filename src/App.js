@@ -10,23 +10,23 @@ class App extends Component {
 
       this.state = { 
         almondell_level:
-          [{ 
+          { 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
-          }],
+          },
         whitburn_level:
-          [{ 
+          { 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
-          }],
+          },
         cragiehall_level:
-          [{ 
+          { 
             name: "No data", 
             current : { value: 0 },
             recent : [0,0,0]
-          }],
+          },
         weatherStation:
           [{ 
             name: "No data", 
@@ -48,9 +48,9 @@ class App extends Component {
          return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]) 
       })
       .then(([data1, data2, data3, data4]) => {
-        this.setState({almondell_level: data1.readings})
-        this.setState({whitburn_level: data2.readings})
-        this.setState({cragiehall_level: data3.readings})
+        this.setState({almondell_level: data1})
+        this.setState({whitburn_level: data2})
+        this.setState({cragiehall_level: data3})
         this.setState({weatherStation: data4.readings})
       })
     };
