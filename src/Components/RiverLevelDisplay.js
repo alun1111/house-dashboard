@@ -28,15 +28,14 @@ class RiverLevelDisplay extends Component {
                         <div className="number-display-title-small">{ this.state.stationName }</div>
                         <div className="number-display-title-very-small">{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
                         <div className="number-display-title-large">{ Number(current.value).toFixed(2) }</div>
-                            <LineChart
-                            width={200}
-                            height={200}
-                            data={recent}
-                            >
-                            <YAxis dataKey="value" />
-                            <XAxis dataKey="measurementTime"  />
-                            <Line type="monotone" dataKey="value" stroke="#f5f5f5" yAxisId={0} />
-                            </LineChart>
+                        <div className="number-display-title-very-small">
+                            <AreaChart width={400} height={200} data={recent} >
+                                <YAxis dataKey="value" />
+                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" />
+                                <Area type="natural" dataKey="value" stroke="#f5f5f5" yAxisId={0} dot={false} />
+                                <Tooltip viewBox={ { x: 0, y: 0, width: 400, height: 400 } } />
+                            </AreaChart>
+                        </div>
                     </div>
             }
             </div>
