@@ -14,3 +14,22 @@
 .number-display-title-very-small {
     font-size: 12px;
 }
+
+/* Pattern styles */
+.container {
+  width: 80%;
+  height: 200px;
+}
+
+.left-half {
+  position: absolute;
+  left: 0px;
+  width: 30%;
+}
+
+.right-half {
+  position: absolute;
+  right: 0px;
+  width: 70%;
+  font-size: 12px;
+}

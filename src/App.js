@@ -62,7 +62,7 @@ class App extends Component {
               <RiverLevelDisplay measurementData={ this.state.almondell_level } stationName="Almondell" />
               <RiverLevelDisplay measurementData={ this.state.whitburn_level } stationName="Whitburn" />
               <RiverLevelDisplay measurementData={ this.state.cragiehall_level } stationName="Cragiehall"/>
-              {/* <NumberDisplay measurementData={ this.state.weatherStation } /> */}
+              <NumberDisplay measurementData={ this.state.weatherStation } />
           </header>
         </div>
       );
