@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import NumberDisplay from './Components/NumberDisplay.js'
-import RiverLevelDisplay from './Components/RiverLevelDisplay.js'
+import RiverLevelPanel from './Components/RiverLevelPanel.js'
 
 class App extends Component {
 
@@ -49,8 +49,8 @@ class App extends Component {
       })
       .then(([data1, data2, data3, data4]) => {
         this.setState({almondell_level: data1})
-        this.setState({whitburn_level: data2})
-        this.setState({cragiehall_level: data3})
+        this.setState({cragiehall_level: data2})
+        this.setState({whitburn_level: data3})
         this.setState({weatherStation: data4.readings})
       })
     };
@@ -59,9 +59,18 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header">
-              <RiverLevelDisplay measurementData={ this.state.almondell_level } stationName="Almondell" />
-              <RiverLevelDisplay measurementData={ this.state.whitburn_level } stationName="Whitburn" />
-              <RiverLevelDisplay measurementData={ this.state.cragiehall_level } stationName="Cragiehall"/>
+              <RiverLevelPanel 
+                measurementData={ this.state.whitburn_level } 
+                stationName="Whitburn"
+                recordMax={2.256} />
+              <RiverLevelPanel 
+                measurementData={ this.state.almondell_level } 
+                stationName="Almondell" 
+                recordMax={2.27} />
+              <RiverLevelPanel 
+                measurementData={ this.state.cragiehall_level } 
+                stationName="Cragiehall"
+                recordMax={3.759}/>
               <NumberDisplay measurementData={ this.state.weatherStation } />
           </header>
         </div>
