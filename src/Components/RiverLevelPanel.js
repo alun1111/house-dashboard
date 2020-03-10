@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import '../Styles/NumberDisplay.css'
-import { XAxis, YAxis, AreaChart, Area } from 'recharts';
+import { XAxis, YAxis, AreaChart, Area, ReferenceLine } from 'recharts';
 
 class RiverLevelPanel extends Component {
     constructor(props) {
       super(props);
 
       this.state = { 
-          measurementData: props.measurementData, 
+          measurementData: 
+          { 
+            name: "No data", 
+            current : { value: 0 },
+            recent : [0,0,0]
+          },
+          stationId: props.stationId,
           stationName: props.stationName,
           recordMax: props.recordMax,
          };
     }
 
-    componentDidUpdate(prevProps) {
-        if(this.props.measurementData !== prevProps.measurementData){
-            this.setState({ measurementData: this.props.measurementData });  
-        }
+    componentDidMount(){
+        fetch('http://192.168.1.100:5000/riverlevelreadings/' + this.state.stationId)
+        .then((res) => { 
+         return res.json();
+      })
+        .then((data) => {
+        this.setState({measurementData: data});
+      })
     };
+
+    getYMax(riverMax){
+        return Math.round(riverMax*1.20, 2);
+    }
 
     render() {
         var current = this.state.measurementData.current;
@@ -34,9 +48,10 @@ class RiverLevelPanel extends Component {
                         </div>
                         <div className="right-half">
                             <AreaChart width={400} height={200} data={recent} >
-                                <YAxis dataKey="value" />
+                                <YAxis dataKey="value" type="number" domain={[0, this.getYMax(this.state.recordMax)]} />/>
                                 <XAxis dataKey="measurementTime" interval="preserveStartEnd" />
                                 <Area type="monotone" dataKey="value" stroke="#f5f5f5" yAxisId={0} dot={false} />
+                                <ReferenceLine y={this.state.recordMax} stroke="red" strokeDasharray="3 3" />
                             </AreaChart>
                         </div>
                     </div>

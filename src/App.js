@@ -9,24 +9,6 @@ class App extends Component {
       super(props);
 
       this.state = { 
-        almondell_level:
-          { 
-            name: "No data", 
-            current : { value: 0 },
-            recent : [0,0,0]
-          },
-        whitburn_level:
-          { 
-            name: "No data", 
-            current : { value: 0 },
-            recent : [0,0,0]
-          },
-        cragiehall_level:
-          { 
-            name: "No data", 
-            current : { value: 0 },
-            recent : [0,0,0]
-          },
         weatherStation:
           [{ 
             name: "No data", 
@@ -38,20 +20,12 @@ class App extends Component {
     }
 
     componentDidMount(){
-      Promise.all([
-        fetch('http://192.168.1.100:5000/riverlevelreadings/14869-SG'),
-        fetch('http://192.168.1.100:5000/riverlevelreadings/14867-SG'),
-        fetch('http://192.168.1.100:5000/riverlevelreadings/14881-SG'),
         fetch('http://192.168.1.100:5000/weatherstationreadings')
-      ])
-        .then(([res1, res2, res3, res4]) => { 
-         return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]) 
+        .then((res) => { 
+         return res.json();
       })
-      .then(([data1, data2, data3, data4]) => {
-        this.setState({almondell_level: data1})
-        this.setState({cragiehall_level: data2})
-        this.setState({whitburn_level: data3})
-        this.setState({weatherStation: data4.readings})
+        .then((data) => {
+        this.setState({weatherStation: data.readings})
       })
     };
 
@@ -60,15 +34,15 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
               <RiverLevelPanel 
-                measurementData={ this.state.whitburn_level } 
+                stationId="14881-SG"
                 stationName="Whitburn"
                 recordMax={2.256} />
               <RiverLevelPanel 
-                measurementData={ this.state.almondell_level } 
+                stationId="14869-SG"
                 stationName="Almondell" 
                 recordMax={2.27} />
               <RiverLevelPanel 
-                measurementData={ this.state.cragiehall_level } 
+                stationId="14867-SG"
                 stationName="Cragiehall"
                 recordMax={3.759}/>
               <NumberDisplay measurementData={ this.state.weatherStation } />
