@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NumberDisplay from './Components/NumberDisplay.js'
 import RiverLevelPanel from './Components/RiverLevelPanel.js'
+import RainfallPanel from './Components/RainfallPanel.js'
 
 class App extends Component {
 
@@ -45,6 +46,10 @@ class App extends Component {
                 stationId="14867-SG"
                 stationName="Cragiehall"
                 recordMax={3.759}/>
+              <RainfallPanel 
+                stationId="14881"
+                stationName="Whitburn"
+                />
               <NumberDisplay measurementData={ this.state.weatherStation } />
           </header>
         </div>
