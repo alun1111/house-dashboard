@@ -50,6 +50,14 @@ class App extends Component {
                 stationId="14881"
                 stationName="Whitburn"
                 />
+              <RainfallPanel 
+                stationId="15200"
+                stationName="Harperrig"
+                />
+              <RainfallPanel 
+                stationId="15196"
+                stationName="Gogarbank"
+                />
               <NumberDisplay measurementData={ this.state.weatherStation } />
           </header>
         </div>

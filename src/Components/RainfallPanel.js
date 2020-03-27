@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../Styles/NumberDisplay.css'
-import { XAxis, YAxis, BarChart } from 'recharts';
+import { XAxis, YAxis, BarChart, Bar } from 'recharts';
 
 class RainfallPanel extends Component {
     constructor(props) {
@@ -40,10 +40,11 @@ class RainfallPanel extends Component {
                             <div className="number-display-title-small">{ this.state.stationName }</div>
                             <div className="number-display-title-very-small">{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
                             <div className="number-display-title-large">{ Number(current.value).toFixed(2) }</div>
-                        </div>
+                              </div>
                         <div className="right-half">
                             <BarChart width={400} height={200} data={recent} >
-                                <YAxis dataKey="value" type="number" domain={[0, 100]} />/>
+                                <Bar dataKey="value" fill="#03bafc" />
+                                <YAxis dataKey="value" type="number" />
                                 <XAxis dataKey="measurementTime" interval="preserveStartEnd" />
                             </BarChart>
                         </div>
