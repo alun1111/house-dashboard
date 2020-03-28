@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Styles/NumberDisplay.css'
 import { XAxis, YAxis, AreaChart, Area, ReferenceLine } from 'recharts';
+import moment from 'moment'
 
 class RiverLevelPanel extends Component {
     constructor(props) {
@@ -33,6 +34,11 @@ class RiverLevelPanel extends Component {
         return Math.round(riverMax*1.20, 2);
     }
 
+    formatXAxis(tickItem) {
+    // If using moment.js
+        return moment(tickItem).format('MMM Do')
+    }
+
     render() {
         var current = this.state.measurementData.current;
         var recent = this.state.measurementData.recent; 
@@ -49,7 +55,7 @@ class RiverLevelPanel extends Component {
                         <div className="right-half">
                             <AreaChart width={400} height={200} data={recent} >
                                 <YAxis dataKey="value" type="number" domain={[0, this.getYMax(this.state.recordMax)]} />/>
-                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" />
+                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" tickFormatter={this.formatXAxis} />
                                 <Area type="monotone" dataKey="value" stroke="#f5f5f5" yAxisId={0} dot={false} />
                                 <ReferenceLine y={this.state.recordMax} stroke="red" strokeDasharray="3 3" />
                             </AreaChart>

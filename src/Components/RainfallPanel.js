@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Styles/NumberDisplay.css'
 import { XAxis, YAxis, BarChart, Bar } from 'recharts';
+import moment from 'moment'
 
 class RainfallPanel extends Component {
     constructor(props) {
@@ -28,6 +29,11 @@ class RainfallPanel extends Component {
       })
     };
 
+    formatXAxis(tickItem) {
+    // If using moment.js
+        return moment(tickItem).format('MMM Do')
+    }
+
     render() {
         var current = this.state.measurementData.current;
         var recent = this.state.measurementData.recent; 
@@ -45,7 +51,7 @@ class RainfallPanel extends Component {
                             <BarChart width={400} height={200} data={recent} >
                                 <Bar dataKey="value" fill="#03bafc" />
                                 <YAxis dataKey="value" type="number" />
-                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" />
+                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" tickFormatter={this.formatXAxis} />
                             </BarChart>
                         </div>
                     </div>
