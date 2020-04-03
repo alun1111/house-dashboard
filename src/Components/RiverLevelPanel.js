@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../Styles/NumberDisplay.css'
 import { XAxis, YAxis, AreaChart, Area, ReferenceLine } from 'recharts';
 import moment from 'moment'
 
@@ -44,15 +43,15 @@ class RiverLevelPanel extends Component {
         var recent = this.state.measurementData.recent; 
 
         return ( 
-            <div className="number-display-box">
+            <div>
             {
-                    <div className="container">
-                        <div className="left-half">
-                            <div className="number-display-title-small">{ this.state.stationName }</div>
-                            <div className="number-display-title-very-small">{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
-                            <div className="number-display-title-large">{ Number(current.value).toFixed(2) }</div>
+                    <div>
+                        <div>
+                            <div>{ this.state.stationName }</div>
+                            <div>{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
+                            <div>{ Number(current.value).toFixed(2) }</div>
                         </div>
-                        <div className="right-half">
+                        <div>
                             <AreaChart width={400} height={200} data={recent} >
                                 <YAxis dataKey="value" type="number" domain={[0, this.getYMax(this.state.recordMax)]} />/>
                                 <XAxis dataKey="measurementTime" interval="preserveStartEnd" tickFormatter={this.formatXAxis} />
