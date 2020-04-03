@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './mvp.css';
 import NumberDisplay from './Components/NumberDisplay.js'
 import RiverLevelPanel from './Components/RiverLevelPanel.js'
 import RainfallPanel from './Components/RainfallPanel.js'
@@ -32,35 +33,66 @@ class App extends Component {
 
     render(){
       return (
-        <div className="App">
-          <header className="App-header">
-              <RiverLevelPanel 
-                stationId="14881-SG"
-                stationName="Whitburn"
-                recordMax={2.256} />
-              <RiverLevelPanel 
-                stationId="14869-SG"
-                stationName="Almondell" 
-                recordMax={2.27} />
-              <RiverLevelPanel 
-                stationId="14867-SG"
-                stationName="Cragiehall"
-                recordMax={3.759}/>
-              <RainfallPanel 
-                stationId="14881"
-                stationName="Whitburn"
-                />
-              <RainfallPanel 
-                stationId="15200"
-                stationName="Harperrig"
-                />
-              <RainfallPanel 
-                stationId="15196"
-                stationName="Gogarbank"
-                />
-              <NumberDisplay measurementData={ this.state.weatherStation } />
-          </header>
-        </div>
+            <main>
+              <section>
+            <table>
+              <tr>
+                <td>
+                  <RiverLevelPanel
+                    stationId="14881-SG"
+                    stationName="Whitburn"
+                    recordMax={2.256} />
+                </td>
+                <td>
+                  <RiverLevelPanel
+                    stationId="14869-SG"
+                    stationName="Almondell"
+                    recordMax={2.27} />
+                </td>
+                <td>
+                  <RiverLevelPanel
+                    stationId="14867-SG"
+                    stationName="Cragiehall"
+                    recordMax={3.759} />
+                </td>
+              </tr>
+              </table>
+              </section>
+              <section>
+                <table>
+                
+              <tr>
+                <td>
+                  <RainfallPanel
+                    stationId="14881"
+                    stationName="Whitburn"
+                  />
+                </td>
+                <td>
+                  <RainfallPanel
+                    stationId="15200"
+                    stationName="Harperrig"
+                  />
+                </td>
+                <td>
+                  <RainfallPanel
+                    stationId="15196"
+                    stationName="Gogarbank"
+                  />
+                </td>
+              </tr>
+              </table>
+              </section>
+              <section>
+                <table>
+              <tr>
+                <td>
+                  <NumberDisplay measurementData={this.state.weatherStation} />
+                </td>
+              </tr>
+            </table>
+              </section>
+            </main>
       );
     }
 }
