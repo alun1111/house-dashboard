@@ -30,7 +30,7 @@ class RainfallPanel extends Component {
 
     formatXAxis(tickItem) {
     // If using moment.js
-        return moment(tickItem).format('MMM Do')
+        return moment(tickItem).format('H')
     }
 
     render() {

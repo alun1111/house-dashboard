@@ -31,7 +31,7 @@ class TemperaturePanel extends Component {
 
     formatXAxis(tickItem) {
     // If using moment.js
-        return moment(tickItem).format('MMM Do')
+        return moment(tickItem).format('H')
     }
 
     render() {
@@ -51,7 +51,7 @@ class TemperaturePanel extends Component {
                             <LineChart width={400} height={200} data={recent} >
                                 <Line dataKey="value" fill="#03bafc" />
                                 <YAxis dataKey="value" type="number" />
-                                <XAxis dataKey="measurementTime" type="number" tickFormatter={this.formatXAxis} />
+                                <XAxis dataKey="measurementTime" tickFormatter={this.formatXAxis} />
                             </LineChart>
                         </div>
                     </div>
