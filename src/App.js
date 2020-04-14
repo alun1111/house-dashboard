@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import './mvp.css';
-import NumberDisplay from './Components/NumberDisplay.js'
+import TemperaturePanel from './Components/TemperaturePanel.js'
 import RiverLevelPanel from './Components/RiverLevelPanel.js'
 import RainfallPanel from './Components/RainfallPanel.js'
 
@@ -33,8 +33,8 @@ class App extends Component {
 
     render(){
       return (
-            <main>
-              <section>
+        <main>
+          <section>
             <table>
               <tr>
                 <td>
@@ -56,11 +56,11 @@ class App extends Component {
                     recordMax={3.759} />
                 </td>
               </tr>
-              </table>
-              </section>
-              <section>
-                <table>
-                
+            </table>
+          </section>
+          <section>
+            <table>
+
               <tr>
                 <td>
                   <RainfallPanel
@@ -81,18 +81,21 @@ class App extends Component {
                   />
                 </td>
               </tr>
-              </table>
-              </section>
-              <section>
-                <table>
+            </table>
+          </section>
+          <section>
+            <table>
               <tr>
                 <td>
-                  <NumberDisplay measurementData={this.state.weatherStation} />
+                  <TemperaturePanel stationId="wmr-89" temperatureType="outside" />
+                </td>
+                <td>
+                  <TemperaturePanel stationId="wmr-89" temperatureType="inside" />
                 </td>
               </tr>
             </table>
-              </section>
-            </main>
+          </section>
+        </main>
       );
     }
 }
