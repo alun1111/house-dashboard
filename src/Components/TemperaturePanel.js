@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { XAxis, YAxis, AreaChart, Area, ReferenceLine } from 'recharts';
+import { XAxis, YAxis, LineChart, Line } from 'recharts';
 import moment from 'moment'
 
-class RiverLevelPanel extends Component {
+class TemperaturePanel extends Component {
     constructor(props) {
       super(props);
 
@@ -15,12 +15,12 @@ class RiverLevelPanel extends Component {
           },
           stationId: props.stationId,
           stationName: props.stationName,
-          recordMax: props.recordMax,
+          temperatureType: props.temperatureType,
          };
     }
 
     componentDidMount(){
-        fetch('http://192.168.1.100:5000/riverlevelreadings/' + this.state.stationId)
+        fetch('http://192.168.1.100:5000/temperaturereadings/' + this.state.stationId + '/' + this.state.temperatureType)
         .then((res) => { 
          return res.json();
       })
@@ -28,10 +28,6 @@ class RiverLevelPanel extends Component {
         this.setState({measurementData: data});
       })
     };
-
-    getYMax(riverMax){
-        return Math.round(riverMax*1.20, 2);
-    }
 
     formatXAxis(tickItem) {
     // If using moment.js
@@ -50,14 +46,13 @@ class RiverLevelPanel extends Component {
                             <div>{ this.state.stationName }</div>
                             <div>{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
                             <div>{ Number(current.value).toFixed(2) }</div>
-                        </div>
+                              </div>
                         <div>
-                            <AreaChart width={400} height={200} data={recent} >
-                                <YAxis dataKey="value" type="number" domain={[0, this.getYMax(this.state.recordMax)]} />/>
-                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" tickFormatter={this.formatXAxis} />
-                                <Area type="monotone" dataKey="value" stroke="#f5f5f5" yAxisId={0} dot={false} />
-                                <ReferenceLine y={this.state.recordMax} stroke="red" strokeDasharray="3 3" />
-                            </AreaChart>
+                            <LineChart width={400} height={200} data={recent} >
+                                <Line dataKey="value" fill="#03bafc" />
+                                <YAxis dataKey="value" type="number" />
+                                <XAxis dataKey="measurementTime" type="number" tickFormatter={this.formatXAxis} />
+                            </LineChart>
                         </div>
                     </div>
             }
@@ -66,4 +61,4 @@ class RiverLevelPanel extends Component {
     };
 };
 
-export default RiverLevelPanel
+export default TemperaturePanel
