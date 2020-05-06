@@ -34,67 +34,38 @@ class App extends Component {
     render(){
       return (
         <main>
-          <section>
-            <table>
-              <tr>
-                <td>
                   <RiverLevelPanel
                     stationId="14881-SG"
                     stationName="Whitburn"
                     recordMax={2.256} />
-                </td>
-                <td>
                   <RiverLevelPanel
                     stationId="14869-SG"
                     stationName="Almondell"
                     recordMax={2.27} />
-                </td>
-                <td>
                   <RiverLevelPanel
                     stationId="14867-SG"
                     stationName="Cragiehall"
                     recordMax={3.759} />
-                </td>
-              </tr>
-            </table>
-          </section>
-          <section>
-            <table>
-
-              <tr>
-                <td>
                   <RainfallPanel
                     stationId="14881"
                     stationName="Whitburn"
                   />
-                </td>
-                <td>
                   <RainfallPanel
                     stationId="15200"
                     stationName="Harperrig"
                   />
-                </td>
-                <td>
                   <RainfallPanel
                     stationId="15196"
                     stationName="Gogarbank"
                   />
-                </td>
-              </tr>
-            </table>
-          </section>
-          <section>
-            <table>
-              <tr>
-                <td>
-                  <TemperaturePanel stationId="wmr-89" temperatureType="outside" />
-                </td>
-                <td>
-                  <TemperaturePanel stationId="wmr-89" temperatureType="inside" />
-                </td>
-              </tr>
-            </table>
-          </section>
+                  <TemperaturePanel 
+                    stationId="wmr-89" 
+                    stationName="Outside Temp" 
+                    temperatureType="outside" />
+                  <TemperaturePanel 
+                    stationId="wmr-89" 
+                    stationName="Inside Temp" 
+                    temperatureType="inside" />
         </main>
       );
     }

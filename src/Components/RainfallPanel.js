@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { XAxis, YAxis, BarChart, Bar } from 'recharts';
+import { XAxis, YAxis, BarChart, Bar, ResponsiveContainer } from 'recharts';
 import moment from 'moment'
 
 class RainfallPanel extends Component {
@@ -29,8 +29,7 @@ class RainfallPanel extends Component {
     };
 
     formatXAxis(tickItem) {
-    // If using moment.js
-        return moment(tickItem).format('H')
+        return moment.unix(tickItem).format('ddd Do')
     }
 
     render() {
@@ -40,20 +39,23 @@ class RainfallPanel extends Component {
         return ( 
             <div>
             {
-                    <div>
-                        <div>
-                            <div>{ this.state.stationName }</div>
-                            <div>{ new Date(current.measurementTime).toLocaleString("en-GB") }</div>
-                            <div>{ Number(current.value).toFixed(2) }</div>
-                              </div>
-                        <div>
-                            <BarChart width={400} height={200} data={recent} >
+                <section>
+                    <header>
+                        <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
+                        <h1>{ Number(current.value).toFixed(2) }</h1>
+                        <ResponsiveContainer width = '95%' height = {400} >
+                            <BarChart data={recent} >
                                 <Bar dataKey="value" fill="#03bafc" />
                                 <YAxis dataKey="value" type="number" />
-                                <XAxis dataKey="measurementTime" interval="preserveStartEnd" tickFormatter={this.formatXAxis} />
+                                <XAxis dataKey="timeIndex" 
+                                    scale="time" 
+                                    type="number" 
+                                    domain = {['auto', 'auto']}
+                                    tickFormatter={this.formatXAxis} />
                             </BarChart>
-                        </div>
-                    </div>
+                        </ResponsiveContainer>
+                    </header>
+                </section>
             }
             </div>
         )
