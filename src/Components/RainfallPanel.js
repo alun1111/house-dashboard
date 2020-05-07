@@ -43,7 +43,7 @@ class RainfallPanel extends Component {
                     <header>
                         <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
                         <h1>{ Number(current.value).toFixed(2) }</h1>
-                        <ResponsiveContainer width = '95%' height = {400} >
+                        <ResponsiveContainer width = '95%' height = {250} >
                             <BarChart data={recent} >
                                 <Bar dataKey="value" fill="#03bafc" />
                                 <YAxis dataKey="value" type="number" />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { XAxis, YAxis, LineChart, Line, ResponsiveContainer } from 'recharts';
+import { XAxis, YAxis, LineChart, Line, ResponsiveContainer, CartesianGrid } from 'recharts';
 import moment from 'moment'
 
 class TemperaturePanel extends Component {
@@ -44,12 +44,13 @@ class TemperaturePanel extends Component {
                         <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
                         <h2>{ Number(current.value).toFixed(2) }</h2>
                     </header>
-                            <ResponsiveContainer width = '95%' height = {400} >
+                            <ResponsiveContainer width = '95%' height = {250} >
                                 <LineChart data={recent}>
                                     <Line dataKey="value" 
                                         fill="#03bafc" 
                                         dot={false} />
                                     <YAxis dataKey="value" type="number" />
+                                    <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="timeIndex" 
                                         scale="time" 
                                         type="number" 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { XAxis, YAxis, AreaChart, Area, ReferenceLine, ResponsiveContainer } from 'recharts';
+import { XAxis, YAxis, AreaChart, Area, ReferenceLine, ResponsiveContainer, CartesianGrid } from 'recharts';
 import moment from 'moment'
 
 class RiverLevelPanel extends Component {
@@ -50,7 +50,7 @@ class RiverLevelPanel extends Component {
                         <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
                         <h1>{ Number(current.value).toFixed(2) }</h1>
                    </header> 
-                        <ResponsiveContainer width = '95%' height = {400} >
+                        <ResponsiveContainer width = '95%' height = {250} >
                             <AreaChart data={recent} >
                                 <YAxis dataKey="value" type="number" domain={[0, this.getYMax(this.state.recordMax)]} />/>
                                 <XAxis dataKey="timeIndex" 
@@ -58,6 +58,7 @@ class RiverLevelPanel extends Component {
                                     type="number" 
                                     domain = {['auto', 'auto']}
                                     tickFormatter={this.formatXAxis} />
+                                <CartesianGrid strokeDasharray="3 3" />
                                 <Area type="monotone" dataKey="value" stroke="#f5f5f5" yAxisId={0} dot={false} />
                                 <ReferenceLine y={this.state.recordMax} stroke="red" strokeDasharray="3 3" />
                             </AreaChart>
