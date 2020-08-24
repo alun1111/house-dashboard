@@ -20,7 +20,7 @@ class RiverLevelPanel extends Component {
     }
 
     componentDidMount(){
-        fetch('http://192.168.1.100:5000/riverlevelreadings/' + this.state.stationId)
+        fetch('http://192.168.1.100:5000/riverlevel/' + this.state.stationId)
         .then((res) => { 
          return res.json();
       })

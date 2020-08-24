@@ -7,30 +7,6 @@ import RainfallPanel from './Components/RainfallPanel.js'
 
 class App extends Component {
 
-    constructor(props) {
-      super(props);
-
-      this.state = { 
-        weatherStation:
-          [{ 
-            name: "No data", 
-            current : { value: 0 },
-            recent : [0,0,0]
-          }],
-        
-        };
-    }
-
-    componentDidMount(){
-        fetch('http://192.168.1.100:5000/weatherstationreadings')
-        .then((res) => { 
-         return res.json();
-      })
-        .then((data) => {
-        this.setState({weatherStation: data.readings})
-      })
-    };
-
     render(){
       return (
         <main>

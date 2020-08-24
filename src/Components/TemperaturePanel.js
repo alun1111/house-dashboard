@@ -19,7 +19,7 @@ class TemperaturePanel extends Component {
          };
     }
     componentDidMount(){
-        fetch('http://192.168.1.100:5000/temperaturereadings/' + this.state.stationId + '/' + this.state.temperatureType)
+        fetch('http://192.168.1.100:5000/temperature/' + this.state.stationId + '/' + this.state.temperatureType)
         .then((res) => { 
          return res.json();
       })
