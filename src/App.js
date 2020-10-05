@@ -4,12 +4,14 @@ import './mvp.css';
 import TemperaturePanel from './Components/TemperaturePanel.js'
 import RiverLevelPanel from './Components/RiverLevelPanel.js'
 import RainfallPanel from './Components/RainfallPanel.js'
+import SummaryPanel from './Components/SummaryPanel';
 
 class App extends Component {
 
     render(){
       return (
         <main>
+                  <SummaryPanel />
                   <RiverLevelPanel
                     stationId="14881-SG"
                     stationName="Whitburn"
