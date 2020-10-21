@@ -16,16 +16,20 @@ class RiverLevelPanel extends Component {
           stationId: props.stationId,
           stationName: props.stationName,
           recordMax: props.recordMax,
+          startLoading: null,
+          stopLoading: null
          };
     }
 
     componentDidMount(){
+        this.setState({startLoading: moment()});
         fetch('http://192.168.1.100:5000/riverlevel/' + this.state.stationId)
         .then((res) => { 
-         return res.json();
+        return res.json();
       })
         .then((data) => {
         this.setState({measurementData: data});
+        this.setState({stopLoading: moment()});
       })
     };
 
@@ -52,7 +56,7 @@ class RiverLevelPanel extends Component {
                    </header> 
                         <ResponsiveContainer width = '95%' height = {250} >
                             <AreaChart data={recent} >
-                                <YAxis dataKey="value" type="number" domain={[0, this.getYMax(this.state.recordMax)]} />/>
+                                <YAxis dataKey="value" type="number" domain={[0, this.getYMax(this.state.recordMax)]} />
                                 <XAxis dataKey="timeIndex" 
                                     scale="time" 
                                     type="number" 
@@ -63,6 +67,10 @@ class RiverLevelPanel extends Component {
                                 <ReferenceLine y={this.state.recordMax} stroke="red" strokeDasharray="3 3" />
                             </AreaChart>
                         </ResponsiveContainer>
+                    <footer>Retrieved in { this.state.stopLoading
+                            ? this.state.stopLoading.diff(this.state.startLoading) + "ms"
+                            : "loading..." }
+                    </footer>
                 </section>
             }
             </div>

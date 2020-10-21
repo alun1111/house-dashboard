@@ -14,15 +14,19 @@ class SummaryPanel extends Component {
             },
             rainfallSummaries: []
           },
+          startLoading: null,
+          stopLoading: null
          };
     }
 
     componentDidMount(){
+        this.setState({startLoading: moment()});
         fetch('http://192.168.1.100:5000/summary/')
         .then((res) => { 
          return res.json();
       })
         .then((data) => {
+        this.setState({stopLoading: moment()});
         this.setState({summary: data});
       })
     };
@@ -78,6 +82,10 @@ class SummaryPanel extends Component {
                     </table>
 
                     </aside>
+                    <footer>Retrieved in { this.state.stopLoading
+                            ? this.state.stopLoading.diff(this.state.startLoading) + "ms"
+                            : "loading..." }
+                    </footer>
                 </section>
             }
             </div>

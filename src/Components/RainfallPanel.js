@@ -15,16 +15,20 @@ class RainfallPanel extends Component {
           },
           stationId: props.stationId,
           stationName: props.stationName,
+          startLoading: null,
+          stopLoading: null
          };
     }
 
     componentDidMount(){
+        this.setState({startLoading: moment()});
         fetch('http://192.168.1.100:5000/rainfall/' + this.state.stationId)
         .then((res) => { 
          return res.json();
       })
         .then((data) => {
         this.setState({measurementData: data});
+        this.setState({stopLoading: moment()});
       })
     };
 
@@ -55,6 +59,10 @@ class RainfallPanel extends Component {
                             </BarChart>
                         </ResponsiveContainer>
                     </header>
+                    <footer>Retrieved in { this.state.stopLoading
+                            ? this.state.stopLoading.diff(this.state.startLoading) + "ms"
+                            : "loading..." }
+                    </footer>
                 </section>
             }
             </div>
