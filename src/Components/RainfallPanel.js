@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InfoPanel from './InfoPanel.js'
 import { XAxis, YAxis, BarChart, Bar, ResponsiveContainer } from 'recharts';
 import moment from 'moment'
 
@@ -59,9 +60,10 @@ class RainfallPanel extends Component {
                             </BarChart>
                         </ResponsiveContainer>
                     </header>
-                    <footer>Retrieved in { this.state.stopLoading
-                            ? this.state.stopLoading.diff(this.state.startLoading) + "ms"
-                            : "loading..." }
+                    <footer>
+                        <InfoPanel 
+                            startLoading={this.state.startLoading}
+                            stopLoading={this.state.stopLoading} />
                     </footer>
                 </section>
             }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InfoPanel from './InfoPanel.js'
 import { XAxis, YAxis, AreaChart, Area, ReferenceLine, ResponsiveContainer, CartesianGrid } from 'recharts';
 import moment from 'moment'
 
@@ -67,10 +68,11 @@ class RiverLevelPanel extends Component {
                                 <ReferenceLine y={this.state.recordMax} stroke="red" strokeDasharray="3 3" />
                             </AreaChart>
                         </ResponsiveContainer>
-                    <footer>Retrieved in { this.state.stopLoading
-                            ? this.state.stopLoading.diff(this.state.startLoading) + "ms"
-                            : "loading..." }
-                    </footer>
+                        <footer>
+                            <InfoPanel 
+                                startLoading={this.state.startLoading}
+                                stopLoading={this.state.stopLoading} />
+                        </footer>
                 </section>
             }
             </div>

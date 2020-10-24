@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InfoPanel from './InfoPanel.js'
 import { XAxis, YAxis, LineChart, Line, ResponsiveContainer, CartesianGrid } from 'recharts';
 import moment from 'moment'
 
@@ -16,15 +17,19 @@ class TemperaturePanel extends Component {
           stationId: props.stationId,
           stationName: props.stationName,
           temperatureType: props.temperatureType,
+          startLoading: null,
+          stopLoading: null
          };
     }
     componentDidMount(){
+        this.setState({startLoading: moment()});
         fetch('http://192.168.1.100:5000/temperature/' + this.state.stationId + '/' + this.state.temperatureType)
         .then((res) => { 
          return res.json();
       })
         .then((data) => {
         this.setState({measurementData: data});
+        this.setState({stopLoading: moment()});
       })
     };
 
@@ -58,6 +63,11 @@ class TemperaturePanel extends Component {
                                         tickFormatter={this.formatXAxis} />
                                 </LineChart>
                             </ResponsiveContainer>
+                            <footer>
+                                <InfoPanel 
+                                    startLoading={this.state.startLoading}
+                                    stopLoading={this.state.stopLoading} />
+                            </footer>
                 </section>
             }
             </div>

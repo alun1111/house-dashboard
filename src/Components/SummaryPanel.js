@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InfoPanel from './InfoPanel.js'
 import moment from 'moment'
 
 class SummaryPanel extends Component {
@@ -26,8 +27,8 @@ class SummaryPanel extends Component {
          return res.json();
       })
         .then((data) => {
-        this.setState({stopLoading: moment()});
         this.setState({summary: data});
+        this.setState({stopLoading: moment()});
       })
     };
 
@@ -82,9 +83,10 @@ class SummaryPanel extends Component {
                     </table>
 
                     </aside>
-                    <footer>Retrieved in { this.state.stopLoading
-                            ? this.state.stopLoading.diff(this.state.startLoading) + "ms"
-                            : "loading..." }
+                    <footer>
+                        <InfoPanel 
+                            startLoading={this.state.startLoading}
+                            stopLoading={this.state.stopLoading} />
                     </footer>
                 </section>
             }
