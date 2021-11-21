@@ -13,15 +13,15 @@ class App extends Component {
         <main>
                   <SummaryPanel />
                   <RiverLevelPanel
-                    stationId="14881-SG"
+                    stationId="14881"
                     stationName="Whitburn"
                     recordMax={2.256} />
                   <RiverLevelPanel
-                    stationId="14869-SG"
+                    stationId="14869"
                     stationName="Almondell"
                     recordMax={2.27} />
                   <RiverLevelPanel
-                    stationId="14867-SG"
+                    stationId="14867"
                     stationName="Cragiehall"
                     recordMax={3.759} />
                   <RainfallPanel

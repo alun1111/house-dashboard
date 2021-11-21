@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InfoPanel from './InfoPanel.js'
 import { XAxis, YAxis, BarChart, Bar, ResponsiveContainer } from 'recharts';
 import moment from 'moment'
+import configdata from '../config.json'
 
 class RainfallPanel extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class RainfallPanel extends Component {
 
     componentDidMount(){
         this.setState({startLoading: moment()});
-        fetch('http://192.168.1.100:5000/rainfall/' + this.state.stationId)
+        fetch(configdata.SERVER_URL + '/rainfall/' + this.state.stationId)
         .then((res) => { 
          return res.json();
       })
@@ -41,34 +42,40 @@ class RainfallPanel extends Component {
         var current = this.state.measurementData.current;
         var recent = this.state.measurementData.recent; 
 
-        return ( 
-            <div>
-            {
-                <section>
-                    <header>
-                        <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
-                        <h1>{ Number(current.value).toFixed(2) }</h1>
-                        <ResponsiveContainer width = '95%' height = {250} >
-                            <BarChart data={recent} >
-                                <Bar dataKey="value" fill="#03bafc" />
-                                <YAxis dataKey="value" type="number" />
-                                <XAxis dataKey="timeIndex" 
-                                    scale="time" 
-                                    type="number" 
-                                    domain = {['auto', 'auto']}
-                                    tickFormatter={this.formatXAxis} />
-                            </BarChart>
-                        </ResponsiveContainer>
-                    </header>
-                    <footer>
-                        <InfoPanel 
-                            startLoading={this.state.startLoading}
-                            stopLoading={this.state.stopLoading} />
-                    </footer>
-                </section>
-            }
-            </div>
-        )
+        if(current !=null){
+
+            return ( 
+                <div>
+                {
+                    <section>
+                        <header>
+                            <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
+                            <h1>{ Number(current.value).toFixed(2) }</h1>
+                            <ResponsiveContainer width = '95%' height = {250} >
+                                <BarChart data={recent} >
+                                    <Bar dataKey="value" fill="#03bafc" />
+                                    <YAxis dataKey="value" type="number" />
+                                    <XAxis dataKey="timeIndex" 
+                                        scale="time" 
+                                        type="number" 
+                                        domain = {['auto', 'auto']}
+                                        tickFormatter={this.formatXAxis} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </header>
+                        <footer>
+                            <InfoPanel 
+                                startLoading={this.state.startLoading}
+                                stopLoading={this.state.stopLoading} />
+                        </footer>
+                    </section>
+                }
+                </div>
+            )
+        } 
+        else{
+            return(<p>Loading...</p>);
+        }
     };
 };
 

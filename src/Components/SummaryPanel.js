@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InfoPanel from './InfoPanel.js'
 import moment from 'moment'
+import configdata from '../config.json'
 
 class SummaryPanel extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class SummaryPanel extends Component {
 
     componentDidMount(){
         this.setState({startLoading: moment()});
-        fetch('http://192.168.1.100:5000/summary/')
+        fetch(configdata.SERVER_URL + '/summary/')
         .then((res) => { 
          return res.json();
       })
