@@ -25,7 +25,9 @@ class RiverLevelPanel extends Component {
 
     componentDidMount(){
         this.setState({startLoading: moment()});
-        fetch(configdata.SERVER_URL + '/riverlevel/' + this.state.stationId)
+        var startDate = moment(moment().subtract(30, 'days') ).format("YYYY-MM-DD");
+
+        fetch(configdata.SERVER_URL + '/riverlevel/' + this.state.stationId + '?dateFrom=' + startDate)
         .then((res) => { 
         return res.json();
       })
