@@ -24,12 +24,21 @@ class RainfallPanel extends Component {
 
     componentDidMount(){
         this.setState({startLoading: moment()});
-        fetch(configdata.SERVER_URL + '/rainfall/' + this.state.stationId)
+        var startDate = moment(moment().subtract(30, 'days') ).format("YYYY-MM-DD");
+
+        fetch(configdata.SERVER_URL + '/rainfall/' + this.state.stationId + '?dateFrom=' + startDate,
+            {
+                headers: new Headers({
+                    'authorisation': configdata.API_KEY
+                })
+            })
         .then((res) => { 
          return res.json();
       })
         .then((data) => {
+        
         this.setState({measurementData: data});
+        this.setState({startDate: startDate});
         this.setState({stopLoading: moment()});
       })
     };
@@ -49,7 +58,7 @@ class RainfallPanel extends Component {
                 {
                     <section>
                         <header>
-                            <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
+                            <h4>{ this.state.stationName } - { new Date(this.state.startDate).toLocaleString("en-GB") } to { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
                             <h1>{ Number(current.value).toFixed(2) }</h1>
                             <ResponsiveContainer width = '95%' height = {250} >
                                 <BarChart data={recent} >

@@ -25,7 +25,15 @@ class TemperaturePanel extends Component {
 
     componentDidMount(){
         this.setState({startLoading: moment()});
-        fetch(configdata.SERVER_URL + '/temperature/' + this.state.stationId + '/' + this.state.temperatureType)
+
+        var startDate = moment(moment().subtract(30, 'days') ).format("YYYY-MM-DD");
+
+        fetch(configdata.SERVER_URL + '/temperature/' + this.state.stationId + '/' + this.state.temperatureType  + '?dateFrom=' + startDate,
+            {
+                headers: new Headers({
+                    'authorisation': configdata.API_KEY
+                })
+            })
         .then((res) => { 
          return res.json();
       })
@@ -36,7 +44,7 @@ class TemperaturePanel extends Component {
     };
 
     formatXAxis(tickItem) {
-        return moment.unix(tickItem).format('HH:mm')
+        return moment.unix(tickItem).format('ddd Do')
     }
 
     render() {

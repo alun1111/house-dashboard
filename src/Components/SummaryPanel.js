@@ -23,7 +23,12 @@ class SummaryPanel extends Component {
 
     componentDidMount(){
         this.setState({startLoading: moment()});
-        fetch(configdata.SERVER_URL + '/summary/')
+        fetch(configdata.SERVER_URL + '/summary/',
+            {
+                headers: new Headers({
+                    'authorisation': configdata.API_KEY
+                })
+            })
         .then((res) => { 
          return res.json();
       })

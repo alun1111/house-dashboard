@@ -27,13 +27,19 @@ class RiverLevelPanel extends Component {
         this.setState({startLoading: moment()});
         var startDate = moment(moment().subtract(30, 'days') ).format("YYYY-MM-DD");
 
-        fetch(configdata.SERVER_URL + '/riverlevel/' + this.state.stationId + '?dateFrom=' + startDate)
+        fetch(configdata.SERVER_URL + '/riverlevel/' + this.state.stationId + '?dateFrom=' + startDate,
+            {
+                headers: new Headers({
+                    'authorisation': configdata.API_KEY
+                })
+            })
         .then((res) => { 
         return res.json();
       })
         .then((data) => {
         this.setState({measurementData: data});
         this.setState({stopLoading: moment()});
+        this.setState({startDate: startDate});
       })
     };
 
@@ -42,7 +48,7 @@ class RiverLevelPanel extends Component {
     }
 
     formatXAxis(tickItem) {
-        return moment.unix(tickItem).format('HH:mm')
+        return moment.unix(tickItem).format('ddd Do')
     }
 
 
@@ -55,7 +61,7 @@ class RiverLevelPanel extends Component {
                 {
                     <section>
                         <header>
-                            <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
+                            <h4>{ this.state.stationName } - { new Date(this.state.startDate).toLocaleString("en-GB") } to  { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
                             <h1>{ Number(current.value).toFixed(2) }</h1>
                     </header> 
                             <ResponsiveContainer width = '95%' height = {250} >
