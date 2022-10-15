@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^7.2.3",
+    "ajv-errors": "^2.0.1",
+    "ajv-formats": "^2.1.1",
     "metrics-graphics": "^3.0.0-beta1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
