@@ -8,19 +8,23 @@ class TemperaturePanel extends Component {
     constructor(props) {
       super(props);
 
-      this.state = { 
+        this.state = { 
           measurementData: 
           { 
-            name: "No data", 
+            name: "Loading", 
             current : { value: 0 },
             recent : [0,0,0]
           },
-          stationId: props.stationId,
-          stationName: props.stationName,
-          temperatureType: props.temperatureType,
+          stationId: "Loading",
+          stationName: "Loading",
+          temperatureType: "Loading",
           startLoading: null,
           stopLoading: null
          };
+        this.state.stationId = props.stationId;
+        this.state.stationName = props.stationName;
+        this.state.temperatureType = props.temperatureType;
+
     }
 
     componentDidMount(){
@@ -51,13 +55,17 @@ class TemperaturePanel extends Component {
         var current = this.state.measurementData.current;
         var recent = this.state.measurementData.recent;
 
-        if(current !== 'undefined'){
+        if(current && current !== 'undefined'){
             return ( 
                 <div>
                 {
                     <section>
                         <header>
-                            <h4>{ this.state.stationName } - { new Date(current.measurementTime).toLocaleString("en-GB") }</h4>
+                            <h4>
+                            { this.state.stationName && `${this.state.stationName} - `}
+                            { current && current.measurementTime && new Date(current.measurementTime).toLocaleString("en-GB") }
+                            </h4>
+
                             <h2>{ Number(current.value).toFixed(2) }</h2>
                         </header>
                                 <ResponsiveContainer width = '95%' height = {250} >

@@ -1,0 +1,39 @@
+/* ServiceStatus.module.css */
+.serviceContainer {
+  padding: 20px; /* Add padding to create whitespace around the list */
+  background-color: #fff; /* Optional: Set a background color for the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow to the container */
+  border-radius: 8px; /* Optional: Round the corners of the container */
+  margin: 20px auto; /* Center the container with automatic horizontal margins */
+  max-width: 600px; /* Maximum width of the container */
+}
+
+.serviceList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.serviceItem {
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 4px;
+  color: #333; /* Default text color for better contrast on light backgrounds */
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s; /* Transition for color as well */
+}
+
+.success {
+  background-color: #98FB98; /* Pastel green */
+  color: #2F4F4F; /* Darker text color for readability */
+}
+
+.failure {
+  background-color: #FFB6C1; /* Pastel red */
+  color: #8B0000; /* Darker text color for readability */
+}
+
+.loading {
+  background-color: #f0f0f0; /* Light grey for loading state */
+  color: #666; /* Darker text color for contrast */
+}
